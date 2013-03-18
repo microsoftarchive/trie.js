@@ -1,0 +1,32 @@
+{
+  // Globals
+  "predef": [
+  ],
+
+
+  // Each block must be wrapped in curly-braces
+  "curly": true,
+
+  // ES5 Strict mode on
+  "es5": true,
+  "strict": true,
+  "esnext": false,
+
+  // Lint for browser only
+  "browser": true,
+
+  // Allow ExpressionStatements
+  "expr": false,
+
+  // Require capitalization of all constructor function-names
+  "newcap": true,
+
+  // Fail for trailing white-spaces
+  "trailing": true,
+
+  // mandate 2-space indentation
+  "indent": 2,
+
+  // no unsed variables please
+  "unused": true
+}
