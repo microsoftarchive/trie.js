@@ -1,14 +1,20 @@
-(function() {
+(function(global, undefined) {
 
   'use strict';
 
-  // TODO: make amd module if there is a loader
-  // if (typeof define === "function" && define.amd) {
-  //   define( "trie", function () {
-  //     return T;
-  //   });
-  // }
+  var T = {};
 
-  window.T = {};
+  // Node.JS
+  if (typeof module !== 'undefined') {
+    module.exports = T;
+  }
+  // AMD loader like require.js
+  else if (typeof define === "function" && define.amd) {
+    define( "trie", function () { return T; });
+  }
+  // Export as global
+  else {
+    global.T = T;
+  }
 
-}).call();
+}).call(null, this);

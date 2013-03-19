@@ -15,7 +15,7 @@
     index._resolve = T.resolver(index);
 
     // Public methods
-    index.index = T.indexer(index);
+    index.add = T.indexer(index);
     index.search = T.searcher(index);
 
     return index;
