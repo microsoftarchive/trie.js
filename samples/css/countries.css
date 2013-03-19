@@ -1,0 +1,78 @@
+html {
+  margin: 0;
+  padding: 0;
+  border-top: 4px solid #B9C7CE;
+}
+
+body, input {
+  color: #444;
+  font-weight: 200;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  width: 300px;
+  margin: 0 auto;
+  padding: 50px 0 20px 0;
+  text-align: center;
+  background-color: #F6F8F8;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+label {
+  font-weight: 500;
+  color: #666;
+}
+
+#search {
+  display: block;
+  font-size: 18px;
+  padding: 10px;
+  margin: 20px auto 0 auto;
+  position: relative;
+  border: 1px solid #CCC;
+  background-color: #fcfcf8;
+  /*box-shadow: 0 0 1px #888 inset;*/
+  outline: none;
+  width: 278px;
+}
+
+#search:focus {
+  background-color: #FFFFF8;
+}
+
+#results {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  box-shadow: 0 4px 10px #DDD;
+  max-height: 400px;
+  overflow: auto;
+  border: 1px solid #CCC;
+  border-width: 0 1px;
+}
+
+#results li {
+  padding: 10px;
+  background: #EEE;
+  border-top: 1px solid #CCC;
+  font-size: 16px;
+  margin-top: -1px;
+  text-align: left;
+}
+
+#results li:nth-child(2n) {
+  background-color: #DDD;
+}
+
+#results li:last-of-type {
+  border-bottom: 4px solid #BBB;
+}
+
+#results li:hover {
+  background-color: #757B80;
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 1px 1px #222;
+}
