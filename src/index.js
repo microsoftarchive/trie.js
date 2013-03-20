@@ -16,7 +16,7 @@
     var index = this;
     index._trie = {};
 
-    // Private methods
+    // Private
     index._name = config.name || T.helpers.uuid();
     index._tokenize = T.tokenizer[config.tokenizer] || T.tokenizer.whitespace;
     index._resolve = T.resolver(index);
@@ -24,6 +24,11 @@
     // Public methods
     index.add = T.indexer(index);
     index.search = T.searcher(index);
+
+    // Persistance methods
+    var idb = T.storage.indexeddb;
+    index.save = idb.saver(index);
+    index.load = idb.loader(index);
 
     return index;
   }

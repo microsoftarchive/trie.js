@@ -46,6 +46,8 @@
         references.push(flatten(node));
       });
 
+      // TODO: decide if the results should be an AND/OR or the references at this point
+
       if (references.length) {
         var meta = references;
         references = [];
