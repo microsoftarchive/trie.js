@@ -6,6 +6,13 @@
 
     config = config || {};
 
+    // If the first arg is a string, it's the name for the index
+    if(T.helpers.isString(config)) {
+      config = {
+        'name': config
+      };
+    }
+
     var index = this;
     index._trie = {};
 
