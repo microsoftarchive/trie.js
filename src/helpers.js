@@ -12,7 +12,18 @@
     }
   }
 
+  function isArray(obj) {
+    return (obj instanceof Array);
+  }
+
+  var toString = Object.prototype.toString;
+  function isString(obj) {
+    return (toString.call(obj) === '[object String]');
+  }
+
   T.helpers = {
+    'isArray': isArray,
+    'isString': isString,
     'uuid': uuid
   };
 
