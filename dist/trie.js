@@ -119,10 +119,10 @@
           node.refs = node.refs || [];
           node.refs.push(reference);
 
-          // Also insert suffixes with length > 3 in the trie, for partial match
+          // Also insert suffixes with length > 2 in the trie, for partial match
           // TODO: re-evaluate this for better performace & smaller object size
-          if (token.length > 3) {
-            for(var j = 1, l = token.length - 2; j < l; j++) {
+          if (token.length > 2) {
+            for(var j = 1, l = token.length - 1; j < l; j++) {
               node = index._resolve(token.substr(j), true);
               node.refs = node.refs || [];
               node.refs.push(reference);
