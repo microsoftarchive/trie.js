@@ -37,6 +37,7 @@
     // String Test
     var toString = Object.prototype.toString;
     function isString (obj) {
+      // TODO: jsperf this vs typeof check
       return (toString.call(obj) === '[object String]');
     }
     T.helpers = {
@@ -131,32 +132,35 @@
   (function (T, undefined) {
     T.indexer = function indexer (index) {
       // Let each Index have it's own indexer
-      return function (id, text) {
+      return function (id, text, weight) {
         // No text, No Index
         if (text === undefined) {
           return;
         }
+        // Default weight for a doc is 1
+        weight = weight || 1;
         // Tokenize
         var tokens = index._tokenize(text) || [];
         // For each token, find a node in the trie
         // & push a reference to the doc there
-        tokens.forEach(function (token, i) {
+        tokens.forEach(function (token) { //, i) {
           var reference = {
-            'id': id,
+            'id': id
             // TODO: use position/distances for better ranking
-            'position': i
+            // ,'position': i
+            // TODO: use weight
           };
           // Split chars & create a regular trie for prefix search
           var node = index._resolve(token, true);
-          node.refs = node.refs || [];
-          node.refs.push(reference);
+          node.$ = node.$ || [];
+          node.$.push(reference);
           // Also insert suffixes with length > 2 in the trie, for partial match
           // TODO: re-evaluate this for better performace & smaller object size
           if (token.length > 2) {
             for(var j = 1, l = token.length - 1; j < l; j++) {
               node = index._resolve(token.substr(j), true);
-              node.refs = node.refs || [];
-              node.refs.push(reference);
+              node.$ = node.$ || [];
+              node.$.push(reference);
             }
           }
         });
@@ -178,8 +182,8 @@
         }
         refs = refs.concat(flatten(node[key]));
       }
-      if (node.refs instanceof Array) {
-        ids = node.refs.map(function(ref) {
+      if (node.$ instanceof Array) {
+        ids = node.$.map(function(ref) {
           return ref.id;
         });
         refs = refs.concat(ids);
