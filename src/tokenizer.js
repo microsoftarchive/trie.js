@@ -38,7 +38,7 @@
     }
 
     // Split the input by whitespaces, quotes, dots, dashes, or underscores
-    var pieces = input.toLowerCase().split(/[\s\'\"\.\-_]+/);
+    var pieces = input.toLowerCase().split(/[\s\'\"\.\-_;]+/);
     return validator(pieces);
   }
 

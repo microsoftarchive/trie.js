@@ -17,8 +17,8 @@
       refs = refs.concat(flatten(node[key]));
     }
 
-    if (node.$ instanceof Array) {
-      ids = node.$.map(function(ref) {
+    if (node[';'] instanceof Array) {
+      ids = node[';'].map(function(ref) {
         return ref.id;
       });
       refs = refs.concat(ids);

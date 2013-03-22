@@ -3,20 +3,21 @@
   'use strict';
 
   var T = {};
+  var window = global;
 
   // Node.JS
   if (typeof module !== 'undefined') {
     module.exports = T;
   }
   // AMD loader like require.js
-  else if (typeof define === "function" && define.amd) {
+  else if (typeof window.define === "function" && define.amd) {
     define("trie", function () {
       return T;
     });
   }
   // Export as global
   else {
-    global.T = T;
+    window.T = T;
   }
 
 // Module: helpers
@@ -152,15 +153,15 @@
           };
           // Split chars & create a regular trie for prefix search
           var node = index._resolve(token, true);
-          node.$ = node.$ || [];
-          node.$.push(reference);
+          node[';'] = node[';'] || [];
+          node[';'].push(reference);
           // Also insert suffixes with length > 2 in the trie, for partial match
           // TODO: re-evaluate this for better performace & smaller object size
           if (token.length > 2) {
             for(var j = 1, l = token.length - 1; j < l; j++) {
               node = index._resolve(token.substr(j), true);
-              node.$ = node.$ || [];
-              node.$.push(reference);
+              node[';'] = node[';'] || [];
+              node[';'].push(reference);
             }
           }
         });
@@ -182,8 +183,8 @@
         }
         refs = refs.concat(flatten(node[key]));
       }
-      if (node.$ instanceof Array) {
-        ids = node.$.map(function(ref) {
+      if (node[';'] instanceof Array) {
+        ids = node[';'].map(function(ref) {
           return ref.id;
         });
         refs = refs.concat(ids);
