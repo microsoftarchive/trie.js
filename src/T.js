@@ -3,20 +3,21 @@
   'use strict';
 
   var T = {};
+  var window = global;
 
   // Node.JS
   if (typeof module !== 'undefined') {
     module.exports = T;
   }
   // AMD loader like require.js
-  else if (typeof define === "function" && define.amd) {
+  else if (typeof window.define === "function" && define.amd) {
     define("trie", function () {
       return T;
     });
   }
   // Export as global
   else {
-    global.T = T;
+    window.T = T;
   }
 
 //{{MODULES_GO_HERE}}
