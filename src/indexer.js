@@ -1,8 +1,8 @@
-(function(T, undefined) {
+(function (T, undefined) {
 
   'use strict';
 
-  T.indexer = function indexer(index) {
+  T.indexer = function indexer (index) {
 
     // Let each Index have it's own indexer
     return function (id, text) {

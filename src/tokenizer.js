@@ -2,7 +2,7 @@
  * This Module provides various ways of breaking down
  * search-queries & input text, into tokens for searching
  */
-(function (T, undefined) {
+(function (T) {
 
   'use strict';
 
@@ -14,7 +14,7 @@
     }
 
     var tokens = [];
-    input.forEach(function(token) {
+    input.forEach(function (token) {
       // TODO: see if we need to remove some unicode/control chars
 
       // A valid token has to be truthy

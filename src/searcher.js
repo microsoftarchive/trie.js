@@ -51,8 +51,8 @@
       if (references.length) {
         var meta = references;
         references = [];
-        meta.forEach(function(arr) {
-          arr.forEach(function(id) {
+        meta.forEach(function (arr) {
+          arr.forEach(function (id) {
             if(references.indexOf(id) === -1) {
               references.push(id);
             }

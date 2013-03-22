@@ -1,10 +1,10 @@
-(function(T, undefined) {
+(function (T) {
 
   'use strict';
 
   // From https://gist.github.com/jed/982883
   var template = "10000000-1000-4000-8000-100000000000";
-  function uuid(seg) {
+  function uuid (seg) {
     if(seg) {
       return ( seg ^ Math.random() * 16 >> seg/4 ).toString(16);
     } else {
@@ -12,12 +12,15 @@
     }
   }
 
-  function isArray(obj) {
+  // Array Test
+  function isArray (obj) {
     return (obj instanceof Array);
   }
 
+  // String Test
   var toString = Object.prototype.toString;
-  function isString(obj) {
+  function isString (obj) {
+    // TODO: jsperf this vs typeof check
     return (toString.call(obj) === '[object String]');
   }
 

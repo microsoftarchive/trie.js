@@ -13,10 +13,10 @@ It persists on IndexedDB right now, but there are plans for FileSystemAPI based 
 * Basic trie structure generation
 * Lookup in the trie
 * IndexedDB based persistance
+* Build tool
 
 ### TODO
 
-* **Build tool**
 * **Spec Runner**
 * **Handle older IDB specs** & other errors around IDB
 * **Option to enable prefix-only indexing/searching** (much faster, disables full-text search)

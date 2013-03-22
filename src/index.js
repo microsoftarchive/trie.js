@@ -1,4 +1,4 @@
-(function (T, undefined) {
+(function (T) {
 
   'use strict';
 
@@ -27,8 +27,10 @@
 
     // Persistance methods
     var idb = T.storage.indexeddb;
-    index.save = idb.saver(index);
-    index.load = idb.loader(index);
+    if(idb.isSupported) {
+      index.save = idb.saver(index);
+      index.load = idb.loader(index);
+    }
 
     return index;
   }

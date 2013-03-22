@@ -1,4 +1,4 @@
-(function(T, global, undefined) {
+(function(T, global) {
 
   'use strict';
 
@@ -109,6 +109,7 @@
 
   T.storage = T.storage || {};
   T.storage.indexeddb = {
+    'isSupported': !!indexedDB,
     'saver': saver,
     'loader': loader
   };
