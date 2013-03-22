@@ -16,13 +16,16 @@
     var index = this;
     index._trie = {};
 
+    // To conditionally disable substring/suffix indexing
+    var subStringIndexingEnabled = !!config.indexSubstring ? true : false;
+
     // Private
     index._name = config.name || T.helpers.uuid();
     index._tokenize = T.tokenizer[config.tokenizer] || T.tokenizer.whitespace;
     index._resolve = T.resolver(index);
 
     // Public methods
-    index.add = T.indexer(index);
+    index.add = T.indexer(index, subStringIndexingEnabled);
     index.search = T.searcher(index);
 
     // Persistance methods

@@ -79,7 +79,7 @@
         return;
       }
       // Split the input by whitespaces, quotes, dots, dashes, or underscores
-      var pieces = input.toLowerCase().split(/[\s\'\"\.\-_]+/);
+      var pieces = input.toLowerCase().split(/[\s\'\"\.\-_;]+/);
       return validator(pieces);
     }
     T.tokenizer = {
@@ -131,7 +131,7 @@
   
 // Module: indexer
   (function (T, undefined) {
-    T.indexer = function indexer (index) {
+    T.indexer = function indexer (index, subStringIndexingEnabled) {
       // Let each Index have it's own indexer
       return function (id, text, weight) {
         // No text, No Index
@@ -156,8 +156,7 @@
           node[';'] = node[';'] || [];
           node[';'].push(reference);
           // Also insert suffixes with length > 2 in the trie, for partial match
-          // TODO: re-evaluate this for better performace & smaller object size
-          if (token.length > 2) {
+          if (subStringIndexingEnabled && token.length > 2) {
             for(var j = 1, l = token.length - 1; j < l; j++) {
               node = index._resolve(token.substr(j), true);
               node[';'] = node[';'] || [];
@@ -322,12 +321,17 @@
       }
       var index = this;
       index._trie = {};
+      // To conditionally disable substring/suffix indexing
+      var subStringIndexingEnabled = true;
+      if(config.noSub !== false) {
+        subStringIndexingEnabled = false;
+      }
       // Private
       index._name = config.name || T.helpers.uuid();
       index._tokenize = T.tokenizer[config.tokenizer] || T.tokenizer.whitespace;
       index._resolve = T.resolver(index);
       // Public methods
-      index.add = T.indexer(index);
+      index.add = T.indexer(index, subStringIndexingEnabled);
       index.search = T.searcher(index);
       // Persistance methods
       var idb = T.storage.indexeddb;

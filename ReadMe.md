@@ -14,12 +14,12 @@ It persists on IndexedDB right now, but there are plans for FileSystemAPI based 
 * Lookup in the trie
 * IndexedDB based persistance
 * Build tool
+* Option to enable prefix-only indexing (much faster)
 
 ### TODO
 
 * **Spec Runner**
 * **Handle older IDB specs** & other errors around IDB
-* **Option to enable prefix-only indexing/searching** (much faster, disables full-text search)
 * **Pre-open connection**, for faster loading of indices
 
 ##### Others
