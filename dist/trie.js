@@ -184,6 +184,7 @@
       }
       if (node[';'] instanceof Array) {
         ids = node[';'];
+        // This is commeted till we are using IDs instead of ref-nodes
         // .map(function(ref) {
         //   return ref.id;
         // });

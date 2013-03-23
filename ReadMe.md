@@ -15,15 +15,15 @@ It persists on IndexedDB right now, but there are plans for FileSystemAPI based 
 * IndexedDB based persistance
 * Build tool
 * Option to enable prefix-only indexing (much faster)
+* Trie Compresser (for exporting)
 
 ### TODO
 
 * **Spec Runner**
 * **Handle older IDB specs** & other errors around IDB
 * **Pre-open connection**, for faster loading of indices
-
-##### Others
-
+* Trie Decompresser (for importing)
+* Make trie smaller (use a better structure)
 * Ranking (weight based)
 * Alternate tokenizers
 * FileSystemAPI based persistance of the index
