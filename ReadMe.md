@@ -36,7 +36,11 @@ It persists on IndexedDB right now, but there are plans for FileSystemAPI based 
 
 ---
 
-### Guidelines ###
+### Guidelines
 
 * JSHinted with the included .jshintrc, in strict mode
 * Specs in mocha
+
+
+### Links
+* Million other trie implemetations https://github.com/search?l=JavaScript&q=trie&type=Repositories
