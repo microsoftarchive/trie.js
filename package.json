@@ -1,5 +1,14 @@
 {
+  "name": "Trie.JS",
+  "description": "Simple trie implementation to provide full test support for web-apps",
+  "version": "0.1.0",
   "devDependencies": {
-    "mocha": "~1.8.1"
+    "chai": "~1.5.0",
+    "colors": "~0.6.0",
+    "mocha": "~1.8.0",
+    "uglify-js": "~2.2.0"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec specs/*.spec.js"
   }
 }

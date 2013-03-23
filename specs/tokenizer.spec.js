@@ -4,12 +4,8 @@ describe('Tokinizers', function() {
 
   describe('Whitespace Tokinizer', function() {
 
-    beforeEach(function() {
-
-    });
-
-    it('should return words from a sentence', function() {
-      (5).should.be.equal(5);
+    xit('should return words from a sentence', function() {
+      // (5).should.equal(5);
     });
   });
 });
