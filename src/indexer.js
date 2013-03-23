@@ -32,14 +32,14 @@
         // Split chars & create a regular trie for prefix search
         var node = index._resolve(token, true);
         node[';'] = node[';'] || [];
-        node[';'].push(reference);
+        node[';'].push(id); // push reference instead
 
         // Also insert suffixes with length > 2 in the trie, for partial match
         if (subStringIndexingEnabled && token.length > 2) {
           for(var j = 1, l = token.length - 1; j < l; j++) {
             node = index._resolve(token.substr(j), true);
             node[';'] = node[';'] || [];
-            node[';'].push(reference);
+            node[';'].push(id); // push reference instead
           }
         }
       });

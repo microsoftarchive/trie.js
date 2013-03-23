@@ -47,7 +47,7 @@
       'uuid': uuid
     };
   }).call(null, T);
-
+  
 // Module: tokenizer
   /**
    * This Module provides various ways of breaking down
@@ -86,7 +86,7 @@
       'whitespace': whitespaceTokenizer
     };
   }).call(null, T);
-
+  
 // Module: resolver
   /**
    * This module resolves a location in the trie-structure
@@ -128,7 +128,7 @@
       };
     };
   }).call(null, T);
-
+  
 // Module: indexer
   (function (T, undefined) {
     T.indexer = function indexer (index, subStringIndexingEnabled) {
@@ -154,20 +154,20 @@
           // Split chars & create a regular trie for prefix search
           var node = index._resolve(token, true);
           node[';'] = node[';'] || [];
-          node[';'].push(reference);
+          node[';'].push(id); // push reference instead
           // Also insert suffixes with length > 2 in the trie, for partial match
           if (subStringIndexingEnabled && token.length > 2) {
             for(var j = 1, l = token.length - 1; j < l; j++) {
               node = index._resolve(token.substr(j), true);
               node[';'] = node[';'] || [];
-              node[';'].push(reference);
+              node[';'].push(id); // push reference instead
             }
           }
         });
       };
     };
   }).call(null, T);
-
+  
 // Module: searcher
   (function(T, undefined) {
     function flatten (node) {
@@ -183,9 +183,10 @@
         refs = refs.concat(flatten(node[key]));
       }
       if (node[';'] instanceof Array) {
-        ids = node[';'].map(function(ref) {
-          return ref.id;
-        });
+        ids = node[';'];
+        // .map(function(ref) {
+        //   return ref.id;
+        // });
         refs = refs.concat(ids);
       }
       return refs;
@@ -220,7 +221,7 @@
       };
     };
   }).call(null, T);
-
+  
 // Module: storage/indexeddb
   (function(T, global) {
     var dbName = 'trie.js';
@@ -308,7 +309,7 @@
       'loader': loader
     };
   }).call(null, T, window);
-
+  
 // Module: porter
   (function (T) {
     function compress (trie) {
@@ -398,6 +399,6 @@
     }
     T.Index = Index;
   }).call(null, T);
-
+  
 
 }).call(null, this);
