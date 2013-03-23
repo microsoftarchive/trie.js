@@ -2,6 +2,8 @@
 
 ## Trie.JS
 
+[![Build Status](https://travis-ci.org/netroy/trie.js.png?branch=master)](https://travis-ci.org/netroy/trie.js)
+
 Yet another trie-structure implementation in JS to help solve the problem of missing `Full Text Search in IndexedDB`.
 
 It persists on IndexedDB right now, but there are plans for FileSystemAPI based persistance later.
