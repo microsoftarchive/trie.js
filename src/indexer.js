@@ -22,12 +22,12 @@
       // & push a reference to the doc there
       tokens.forEach(function (token) { //, i) {
 
-        var reference = {
-          'id': id
-          // TODO: use position/distances for better ranking
-          // ,'position': i
-          // TODO: use weight
-        };
+        // var reference = {
+        //   'id': id
+        //   // TODO: use position/distances for better ranking
+        //   // ,'position': i
+        //   // TODO: use weight
+        // };
 
         // Split chars & create a regular trie for prefix search
         var node = index._resolve(token, true);

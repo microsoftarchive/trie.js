@@ -11,7 +11,7 @@
 
     var key, ids;
     for (key in node) {
-      if (key.length > 1) {
+      if (key === ';') {
         continue;
       }
       refs = refs.concat(flatten(node[key]));
