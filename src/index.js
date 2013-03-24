@@ -35,6 +35,9 @@
       index.load = idb.loader(index);
     }
 
+    // Codec functions
+    index.compress = T.codec.compresser(index);
+
     return index;
   }
 

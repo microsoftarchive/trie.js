@@ -33,6 +33,7 @@
     'indexer',
     'searcher',
     'storage/indexeddb',
+    'codec',
     'porter',
     'index'
   ];

@@ -311,7 +311,7 @@
     };
   }).call(null, T, window);
   
-// Module: porter
+// Module: codec
   (function (T) {
     function compress (trie) {
       var compressedTrie = {};
@@ -353,6 +353,17 @@
       });
       return compressedTrie;
     }
+    function compresser (index) {
+      return function () {
+        return compress(index._trie);
+      };
+    }
+    T.codec = {
+      'compresser': compresser
+    };
+  }).call(null, T);
+// Module: porter
+  (function (T) {
     function importer (index) {
       return function(json) {
         return [index,json];
@@ -364,7 +375,6 @@
       };
     }
     T.porter = {
-      'compress': compress,
       'importer': importer,
       'exporter': exporter
     };
@@ -396,6 +406,8 @@
         index.save = idb.saver(index);
         index.load = idb.loader(index);
       }
+      // Codec functions
+      index.compress = T.codec.compresser(index);
       return index;
     }
     T.Index = Index;
