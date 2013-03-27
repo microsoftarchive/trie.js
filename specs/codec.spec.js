@@ -31,11 +31,18 @@
   };
 
   describe('Codec', function () {
+
     it('prefix compression', function () {
       // We could do `index.compress()`,
       // but specs should test only functionality of one module
       var out = T.codec.compresser({'_trie': trie})();
       expect(out).to.deep.equal(output);
+    });
+
+    it('decompression', function () {
+      var index = {};
+      T.codec.decompresser(index)(output);
+      expect(index._trie).to.deep.equal(trie);
     });
   });
 

@@ -37,6 +37,7 @@
 
     // Codec functions
     index.compress = T.codec.compresser(index);
+    index.decompress = T.codec.decompresser(index);
 
     return index;
   }

@@ -353,13 +353,41 @@
       });
       return compressedTrie;
     }
+    function decompress (cTrie) {
+      var trie = {};
+      var node = trie;
+      Object.keys(cTrie).forEach(function(key) {
+        var inode = node;
+        if(key === ';') {
+          inode[';'] = cTrie[';'];
+        } else {
+          var chars = key.split('');
+          while(chars.length) {
+            var chr = chars.shift();
+            if(chars.length === 0) {
+              inode[chr] = decompress(cTrie[key]);
+            } else {
+              inode[chr] = inode[chr] || {};
+              inode = inode[chr];
+            }
+          }
+        }
+      });
+      return trie;
+    }
     function compresser (index) {
       return function () {
         return compress(index._trie);
       };
     }
+    function decompresser (index) {
+      return function (trie) {
+        index._trie = decompress(trie);
+      };
+    }
     T.codec = {
-      'compresser': compresser
+      'compresser': compresser,
+      'decompresser': decompresser
     };
   }).call(null, T);
 // Module: porter
@@ -408,6 +436,7 @@
       }
       // Codec functions
       index.compress = T.codec.compresser(index);
+      index.decompress = T.codec.decompresser(index);
       return index;
     }
     T.Index = Index;
