@@ -29,8 +29,24 @@
     return refs;
   }
 
+  // Intersection of two arrays
+  function intersect(arr1, arr2) {
+    var result = [];
+
+    // for an intersection both arrays should contain elements
+    if(arr1.length && arr2.length) {
+      arr1.forEach(function(id) {
+        if(arr2.indexOf(id) !== -1 && result.indexOf(id) === -1) {
+          result.push(id);
+        }
+      });
+    }
+
+    return result;
+  }
+
   // Each index should have it's own searcher as well
-  T.searcher = function searcher (index) {
+  T.searcher = function searcher (index, intersectResults) {
 
     return function (text) {
 
@@ -49,17 +65,32 @@
       });
 
       // TODO: decide if the results should be an AND/OR or the references at this point
-
       if (references.length) {
         var meta = references;
         references = [];
-        meta.forEach(function (arr) {
-          arr.forEach(function (id) {
-            if(references.indexOf(id) === -1) {
-              references.push(id);
-            }
+
+        // No results yo
+        if(!meta.length) {
+          return references;
+        }
+
+        // AND results
+        if(intersectResults) {
+          references = meta.shift();
+          while(meta.length && references.length) {
+            references = intersect(references, meta.shift());
+          }
+        }
+        // OR results
+        else {
+          meta.forEach(function (arr) {
+            arr.forEach(function (id) {
+              if(references.indexOf(id) === -1) {
+                references.push(id);
+              }
+            });
           });
-        });
+        }
       }
       return references;
     };

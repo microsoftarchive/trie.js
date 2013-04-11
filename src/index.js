@@ -18,6 +18,7 @@
 
     // To conditionally disable substring/suffix indexing
     var subStringIndexingEnabled = !!config.indexSubstring ? true : false;
+    var intersectResults = !!config.intersectResults ? true : false;
 
     // Private
     index._name = config.name || T.helpers.uuid();
@@ -26,7 +27,7 @@
 
     // Public methods
     index.add = T.indexer(index, subStringIndexingEnabled);
-    index.search = T.searcher(index);
+    index.search = T.searcher(index, intersectResults);
 
     // Persistance methods
     var idb = T.storage.indexeddb;

@@ -192,8 +192,21 @@
       }
       return refs;
     }
+    // Intersection of two arrays
+    function intersect(arr1, arr2) {
+      var result = [];
+      // for an intersection both arrays should contain elements
+      if(arr1.length && arr2.length) {
+        arr1.forEach(function(id) {
+          if(arr2.indexOf(id) !== -1 && result.indexOf(id) === -1) {
+            result.push(id);
+          }
+        });
+      }
+      return result;
+    }
     // Each index should have it's own searcher as well
-    T.searcher = function searcher (index) {
+    T.searcher = function searcher (index, intersectResults) {
       return function (text) {
         if (text === undefined) {
           return [];
@@ -210,13 +223,27 @@
         if (references.length) {
           var meta = references;
           references = [];
-          meta.forEach(function (arr) {
-            arr.forEach(function (id) {
-              if(references.indexOf(id) === -1) {
-                references.push(id);
-              }
+          // No results yo
+          if(!meta.length) {
+            return references;
+          }
+          // AND results
+          if(intersectResults) {
+            references = meta.shift();
+            while(meta.length && references.length) {
+              references = intersect(references, meta.shift());
+            }
+          }
+          // OR results
+          else {
+            meta.forEach(function (arr) {
+              arr.forEach(function (id) {
+                if(references.indexOf(id) === -1) {
+                  references.push(id);
+                }
+              });
             });
-          });
+          }
         }
         return references;
       };
@@ -421,13 +448,14 @@
       index._trie = {};
       // To conditionally disable substring/suffix indexing
       var subStringIndexingEnabled = !!config.indexSubstring ? true : false;
+      var intersectResults = !!config.intersectResults ? true : false;
       // Private
       index._name = config.name || T.helpers.uuid();
       index._tokenize = T.tokenizer[config.tokenizer] || T.tokenizer.whitespace;
       index._resolve = T.resolver(index);
       // Public methods
       index.add = T.indexer(index, subStringIndexingEnabled);
-      index.search = T.searcher(index);
+      index.search = T.searcher(index, intersectResults);
       // Persistance methods
       var idb = T.storage.indexeddb;
       if(idb.isSupported) {

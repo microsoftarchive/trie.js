@@ -11,7 +11,11 @@
   var countries, index;
 
   function indexData() {
-    index = new T.Index('countries');
+    index = new T.Index({
+      'name' :'countries',
+      'indexSubstring': false,
+      'intersectResults': true
+    });
     console.time('loading');
     index.load(function(err) {
       if(err) {
@@ -79,7 +83,7 @@
     // render the list
     results.innerHTML = ids.map(function(id) {
       var country = countries[id];
-      return '<li>' + country.name + '</li>';
+      return '<li rel="' + id + '">' + country.name + '</li>';
     }).join('');
     lastVal = query;
   }
